@@ -1,0 +1,33 @@
+Automatic:
+gcc -pthread -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/alex/anaconda2/envs/sparse_solvers/include/python3.6m -c pardiso_bind.c -o build/temp.linux-x86_64-3.6/pardiso_bind.o 
+
+-pthread
+
+gcc -pthread -shared -L/home/alex/anaconda2/envs/sparse_solvers/lib -Wl,-rpath=/home/alex/anaconda2/envs/sparse_solvers/lib,--no-as-needed build/temp.linux-x86_64-3.6/pardiso_bind.o -L/home/alex/Downloads -lpardiso500-GNU481-X86-64 -lblas -llapack -lgfortran -lpthread -lpython3.6m -o build/lib.linux-x86_64-3.6/pardiso_bind.cpython-36m-x86_64-linux-gnu.so
+
+
+Mine:
+
+gcc ./pardiso_bind.c -pthread -shared -fwrapv -O3 -g -Wall -fPIC -fno-strict-aliasing -I/home/alex/anaconda2/envs/sparse_solvers/include/python3.6m -L/home/alex/anaconda2/envs/sparse_solvers/lib -L/home/alex/Downloads -lpardiso500-GNU481-X86-64 -llapack -lblas -lgfortran -fopenmp -lpthread -lpython3.6m -o ./pardiso_bind.so
+
+
+
+pardiso_bind:
+-----------------------------------------
+Mine only object:
+gcc -fPIC -g -c -Wall -pthread -fwrapv -fopenmp -I/home/alex/anaconda2/envs/sparse_solvers/include/python3.6m ./pardiso_bind.c
+
+Linking: #
+gcc -shared -pthread -fwrapv ./pardiso_bind.o -L/home/alex/Downloads -lpardiso500-GNU481-X86-64 -L/home/alex/anaconda2/envs/sparse_solvers/lib -Wl,-rpath=/home/alex/anaconda2/envs/sparse_solvers/lib -lpython3.6m -llapack -lblas -lgfortran -fopenmp -lpthread -o pardiso_bind.so
+
+solve_sym_pardiso:
+----------------------------------------
+Conda environment of compilation this time is: sparse_solvers
+At least for running:
+export LD_LIBRARY_PATH=/home/alex/Downloads
+export OMP_NUM_THREADS=1
+-----------------------------------------
+gcc -fPIC -g -c -Wall -pthread -fwrapv -fopenmp -I/home/alex/anaconda2/envs/py3/lib/python3.5/site-packages/numpy/core/include/numpy/ -I/home/alex/anaconda2/envs/sparse_solvers/include/python3.6m ./solve_sym_pardiso.c
+
+Linking: #
+gcc -shared -pthread -fwrapv ./solve_sym_pardiso.o -L/home/alex/Downloads -lpardiso500-GNU481-X86-64 -L/home/alex/anaconda2/envs/sparse_solvers/lib -Wl,-rpath=/home/alex/anaconda2/envs/sparse_solvers/lib -lpython3.6m -llapack -lblas -lgfortran -fopenmp -lpthread -o solve_sym_pardiso.so

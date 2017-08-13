@@ -1,0 +1,11 @@
+Example:
+gcc <source/objects files> -o <executable>
+-L <Path to directory of PARDISO> -lpardiso500-GNU461-X86-64
+-L <Path to directory of LAPACK/BLAS>
+-l <Fast LAPACK and BLAS libraries> -lgfortran -fopenmp -lpthread -lm
+
+
+
+Mine:
+
+gcc ./pardiso_unsym.c -o pardiso_unsym -L/home/alex/Downloads -lpardiso500-GNU481-X86-64 -lblas -llapack -lgfortran -fopenmp -lpthread -lm
